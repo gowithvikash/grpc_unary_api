@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 
 	pb "github.com/gowithvikash/grpc_with_go/grpc_unary_api/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 var (
@@ -13,7 +15,7 @@ var (
 )
 
 func main() {
-	conn, err := grpc.Dial(address)
+	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -24,6 +26,12 @@ func main() {
 }
 
 func do_Simple_Greet(c pb.GreetServiceClient) {
-	fmt.Println("do_Simple_Greet Function Was Invoked At Client")
+	fmt.Println("_______________ Action Number : 01 _______________")
+	fmt.Println("___do_Simple_Greet Function Was Invoked At Client___")
+	res, err := c.Simple_Greet(context.Background(), &pb.GreetRequest{Name: "Vikash Parashar"})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("___ do_Simple_Greet_Result: %v\n", res.Result)
 
 }
