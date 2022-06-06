@@ -26,8 +26,8 @@ func main() {
 }
 
 func do_Simple_Greet(c pb.GreetServiceClient) {
-	fmt.Println("_______________ Action Number : 01 _______________")
-	fmt.Println("___do_Simple_Greet Function Was Invoked At Client___")
+	fmt.Println("\n_______________ Action Number : 01 _______________")
+	fmt.Println("_____  do_Simple_Greet Function Was Invoked At Client  ____")
 	res, err := c.Simple_Greet(context.Background(), &pb.GreetRequest{Name: "Vikash Parashar"})
 	if err != nil {
 		log.Fatal(err)
